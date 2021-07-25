@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Banner from "./components/banner";
+import BlockTwo from "./components/block_two";
+import CardsGroup from "./components/CardsGroup";
+import * as Data from "./data.json";
+import Footer from "./components/footer";
+import BlockFour from "./components/block_four";
+import Header from "./components/header";
+import DataContext from "./store";
 
 function App() {
+
+  const [state,setState] = useState({
+    banner   : {},
+    persons  : Data.data,
+    gridList : false,
+  })
+
+  let handler = (data) => setState({...state,...data});
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <DataContext.Provider value={{
+      state,handler
+    }}>
+      <div className="App">
+        <Header/>
+        <Banner/>
+        <BlockTwo  />
+        <CardsGroup />
+        <BlockFour/> 
+        <Footer/>
+      </div>
+    </DataContext.Provider>
   );
 }
 

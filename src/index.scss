@@ -1,0 +1,35 @@
+@import './fonts/fontello.css';
+
+*{
+  border: 0;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.ro{
+  border: 1px solid red;
+}
+
+:root{
+  --green  :#3CBBB4CC;
+  --orange :#F9AD1DCC;
+  --green-t  :rgba(60, 187, 180, 0.6);
+  --orange-t :rgba(249, 173, 29, 0.6);
+  --black  :#464646;
+}
+
+body,html,#root{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-size: 1rem;
+  font-family: 'Lato', sans-serif;
+  font-weight:300;
+}
+
+.App{
+  height: 100%;
+  overflow: hidden auto;
+  position: relative;
+}
