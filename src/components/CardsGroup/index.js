@@ -2,13 +2,14 @@ import React, { useContext } from 'react';
 import {Container} from "./styles";
 import Card from './card';
 import DataContext from '../../store';
-import { deprecationHandler } from 'moment';
+
 
 const CardsGroup = () => {
     
     let state = useContext(DataContext);
     let {persons,gridList} =  state.state;
     let {handler } = state; 
+    console.log(persons)
     
     return ( 
         <Container 

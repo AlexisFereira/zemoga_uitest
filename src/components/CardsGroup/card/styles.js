@@ -57,29 +57,62 @@ export const Container = styled.div`
         margin: 2px 4px;
         text-align:center;
         padding:0;
+        border:2px solid transparent;
+        
     }
-    .vote-orange{ background-color:var(--orange-t);}
+    .vote-green{ 
+        border-color:${props => props.thumb === "positive" ? "white": "transparent"};
+    }
+    .vote-orange{ 
+        background-color:var(--orange-t);
+        border-color:${props => props.thumb === "negative" ? "white": "transparent"};
+    }
 
     .button-vote{
         flex:0 0 120px;
         margin-left:10px;
         border:2px solid white;
-        color:white;
+        cursor:pointer;
         background:rgba(0,0,0,.6);
         color:white;
         line-height:38px;
         &:hover{
             background:rgba(0,0,0,1);
         }
+        &:disabled{
+            cursor:not-allowed;
+            background:rgba(100,100,100,1);
+        }
     }
 
     .range-votations{
+        justify-content:space-between;
+        padding:0 10px;
+
+        span{
+            display:block;
+            position:relative;
+        }
+
+        .colors{
+            position:absolute;
+            height:100%;
+            width:100%;
+            bottom:0;
+            right:0;
+            flex-flow:row nowrap;
+            display:flex;
+            align-items:center;
+        }
+     
         color:white;
         .green{
+            height:100%;
             flex: 1 0 ${props=> props.ranges.green}%;
             background: var(--green-t);
         }
         .orange{
+            height:100%;
             flex: 1 0 ${props=> props.ranges.orange}%;
             background:var(--orange-t);
             text-align:right;

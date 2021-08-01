@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Banner from "./components/banner";
 import BlockTwo from "./components/block_two";
 import CardsGroup from "./components/CardsGroup";
@@ -7,20 +7,48 @@ import Footer from "./components/footer";
 import BlockFour from "./components/block_four";
 import Header from "./components/header";
 import DataContext from "./store";
+import moment from "moment";
 
 function App() {
 
   const [state,setState] = useState({
     banner   : {},
-    persons  : Data.data,
+    persons  : [],
     gridList : false,
   })
 
+  let DP = "dataPersons";
+ 
   let handler = (data) => setState({...state,...data});
+
+  let setData = (data) => {
+    sessionStorage.setItem(DP,JSON.stringify(data));
+    handler({persons:data});
+  }
+
+  let updateVotes = (name,vote)=>{
+    let newData = state.persons.map((item)=>{
+      if(item.name === name ){
+        item.votes[vote] = item.votes[vote] + 1
+        item.lastUpdated = moment();
+        }
+      
+        return item;
+    })
+    setData(newData);
+  }
+
+  useEffect(()=>{
+    if(sessionStorage.getItem(DP)){
+      let dataPersons = JSON.parse(sessionStorage.getItem(DP));
+      handler({persons:dataPersons});
+    }
+    else setData(Data.data);
+  },[])
   
   return (
     <DataContext.Provider value={{
-      state,handler
+      state,handler,updateVotes
     }}>
       <div className="App">
         <Header/>
